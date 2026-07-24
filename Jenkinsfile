@@ -32,7 +32,7 @@ pipeline {
                 echo "Building ${APP_NAME}"
                 echo "Version: ${APP_VERSION}"
                 echo "Environment: ${ENVIRONMENT}"
-                echo 'Application Build Successful
+                echo 'Application Build Successful'
             }
         }
         stage('Archive') {
