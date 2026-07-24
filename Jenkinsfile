@@ -36,10 +36,10 @@ pipeline {
             }
         }
         stage('Archive') {
-             steps {
-                 archiveArtifacts artifacts: '**/*', fingerprint: true
-         }
-    
+            steps {
+                archiveArtifacts artifacts: '**/*', fingerprint: true
+            }
+        }
        stage('Deploy') {
             steps {
                 sshagent(['ubuntu']) {
@@ -56,12 +56,12 @@ pipeline {
 
                     EOF
                     '''
-                 }
                 }
             }
         }
+    
 
-    }
+
 
     post {
         success {
