@@ -40,6 +40,19 @@ pipeline {
             archiveArtifacts artifacts: '**/*', fingerprint: true
          }
     }
+        stage('Deploy') {
+            steps {
+             sshagent(['ec2-ssh-key']) {
+                sh '''
+                ssh -o StrictHostKeyChecking=no ubuntu@16.170.169.199 "
+                    echo 'Connected to EC2'
+                    hostname
+                    pwd
+                "
+                '''
+             }
+        }
+    }
 
 }
 
