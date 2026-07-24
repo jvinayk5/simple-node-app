@@ -1,6 +1,11 @@
 pipeline {
 
     agent any
+   environment {
+        APP_NAME = "simple-node-app"
+        APP_VERSION = "1.0"
+        ENVIRONMENT = "Development"
+    }
 
     stages {
 
@@ -24,6 +29,9 @@ pipeline {
 
         stage('Build') {
             steps {
+                echo "Building ${APP_NAME}"
+                echo "Version: ${APP_VERSION}"
+                echo "Environment: ${ENVIRONMENT}"
                 echo 'Application Build Successful'
             }
         }
