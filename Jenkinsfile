@@ -27,7 +27,13 @@ pipeline {
                 echo 'Application Build Successful'
             }
         }
+        stage('Archive') {
+             steps {
+            archiveArtifacts artifacts: '**/*', fingerprint: true
+         }
     }
+
+}
 
     post {
         success {
