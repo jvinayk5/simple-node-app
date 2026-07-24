@@ -39,22 +39,28 @@ pipeline {
              steps {
             archiveArtifacts artifacts: '**/*', fingerprint: true
          }
-    }
-        stage('Deploy') {
+    
+       stage('Deploy') {
             steps {
-             sshagent(['ec2-ssh-key']) {
-                sh '''
-                ssh -o StrictHostKeyChecking=no ubuntu@16.170.169.199 "
-                    echo 'Connected to EC2'
-                    hostname
-                    pwd
-                "
-                '''
-             }
-        }
-    }
+                sshagent(['ubuntu']) {
+                    sh '''
+                    ssh -o StrictHostKeyChecking=no ubuntu@16.170.169.199 << EOF
 
-}
+                    cd /home/ubuntu/simple-node-app
+
+                    git pull origin main
+
+                    npm install
+
+                    pm2 restart simple-node-app
+
+                    EOF
+                    '''
+                 }
+            }
+        }
+
+    }
 
     post {
         success {
