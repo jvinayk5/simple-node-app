@@ -4,15 +4,15 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
+            }
+        }
+
+        stage('Fix Permissions') {
+            steps {
+                sh 'chmod +x node_modules/.bin/jest'
             }
         }
 
@@ -27,7 +27,6 @@ pipeline {
                 echo 'Application Build Successful'
             }
         }
-
     }
 
     post {
